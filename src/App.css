@@ -1,0 +1,214 @@
+/*----------------------default------------------*/
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/*--------------------タブコンポーネント------------------*/
+
+.tab-icon {
+  text-align: center;
+}
+
+.tab-icon text {
+  font-size: 11px;
+}
+
+.tab-icon button {
+  padding-top: 1vh;
+  width: 50vw;
+}
+
+/*　画面サイズが480px以下はここを読み込む　*/
+@media screen and (max-width:480px){
+.qr {
+    display: none;
+}
+}
+
+/*　画面サイズが480pxからはここを読み込む　*/
+@media screen and (min-width:480px){
+
+.header-bg {
+    position: absolute;
+}
+
+.responsive {
+    display: none;
+}
+
+.qr {
+    margin-top: 40px;
+    margin-left: -10px;
+}
+
+}
+
+
+.posts-index-item {
+  margin: 10px;
+  border-bottom: 1px;
+}
+
+/*　Main　*/
+body {
+  background-color: #BFDEFC;
+}
+
+.index-container {
+  margin-bottom: 100px;
+}
+
+.posts-index-item {
+  color:#2699FB;
+  background-color: white;
+  margin: 25px 20px;
+  padding: 20px 20px 0px 20px;
+  border-radius: 8px;
+}
+
+.post-title {
+  font-size: 18px;
+  display: block;
+  margin-right: 60px;
+}
+
+.post-footer {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-letter {
+  font-size: 12px;
+}
+
+/*　Content　*/
+.content {
+  margin: 15px 18px 15px 20px;
+}
+
+.content-header {
+  color: #2699FB;
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.post-icon-1 {
+  float: left;
+  margin-top: 10px;
+}
+
+.content-header p{
+  padding-right: 20px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.content-detail {
+  background-color: white;
+  color: #2699FB;
+  height: 730px;
+  overflow-y: auto;
+  padding: 20px 20px 20px 20px;
+  margin-top: 30px;
+  overflow: auto;
+  white-space: pre-line;
+}
+
+/*スクロールバーの横幅指定*/
+.content-detail::-webkit-scrollbar {
+    width: 15px;
+}
+/*スクロールバーの背景色・角丸指定*/
+.content-detail::-webkit-scrollbar-track {
+  border-radius: 10px;
+	background: white;
+  box-shadow: inset 0 0 3px rgb(192,192,192); 
+  margin: 40px;
+}
+/*スクロールバーの色・角丸指定*/
+.content-detail::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+	background:rgba(192,192,192, 0.5);
+}
+
+.content-footer {
+  font-weight: 500;
+  text-align: right;
+  margin-top: 12px;
+  margin-right: 20px;
+}
+
+.content-footer a{
+  color: #008cff;
+  text-decoration: none;
+}
+
+.content-footer span {
+  float: right;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+/* form */
+.form-header p {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  color: #2699FB;
+}
+
+.form-container {
+ text-align: center;
+ padding-top: 40px;
+}
+
+.form-footer {
+  text-align: center;
+}
+
+#grouped-select {
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+#btn {
+  margin-top: 30%;
+  font-size: 20px;
+}
