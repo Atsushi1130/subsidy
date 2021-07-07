@@ -96,7 +96,7 @@ export const Form = () => {
         <div className="form-header">
             <p>設定</p>
         </div>
-        <form method="POST" action="https://script.google.com/macros/s/AKfycbyjwFlh2zUJeaRBLssMkEZmxlEe8DOA6VA1itJoZKB648U0CeZTRABwypvp7l1mmerlcA/exec">
+        <form onsubmit="return false;" method="POST" action="https://script.google.com/macros/s/AKfycbzQL-W_XZ4WG1nRl57mGMivwcSMq3g4WtZ3O1rAqQJnmE6bv7J0-Pv4ISUmFtSCi9Y1iw/exec">
             <div className="form-container">
                 <div>
                     <FormControl className={classes.formControl}>

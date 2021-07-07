@@ -94,15 +94,6 @@ export const Screen = () => {
               isVisibleContent: false,
             })
             }
-            onClickSaveUserInfo={() => setScreen({
-              ...switchScreen,
-              isVisibleForm: true,
-              isVisibleIndex: false,
-              isVisibleContent: false,
-              isVisibleAbout: false,
-              isVisibleContent: false,
-            })
-            }
         />
         </div>
       </>
