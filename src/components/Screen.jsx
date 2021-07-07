@@ -24,7 +24,7 @@ export const Screen = () => {
     return (
       <>
         <div className="responsive">
-        {switchScreen.isVisibleIndex && 
+        {switchScreen.isVisibleIndex &&
         <Index
         onClickPost={
           () => setScreen({
@@ -40,7 +40,7 @@ export const Screen = () => {
         }
         />
         }
-        {switchScreen.isVisibleContent && 
+        {switchScreen.isVisibleContent &&
         <Content
         contentId = {contentId}
         onClickBackButton={() => setScreen({
@@ -54,7 +54,7 @@ export const Screen = () => {
         }
         />
         }
-        {switchScreen.isVisibleForm && 
+        {switchScreen.isVisibleForm &&
         <Form/>
         }
         <Tab
@@ -91,6 +91,15 @@ export const Screen = () => {
               isVisibleIndex: true,
               isVisibleContent: false,
               isVisibleAbout: true,
+              isVisibleContent: false,
+            })
+            }
+            onClickSaveUserInfo={() => setScreen({
+              ...switchScreen,
+              isVisibleForm: true,
+              isVisibleIndex: false,
+              isVisibleContent: false,
+              isVisibleAbout: false,
               isVisibleContent: false,
             })
             }

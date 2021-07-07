@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
       minWidth: 120,
     },
   }));
-  
+
 const useButtonStyles = makeStyles((theme) => ({
     button: {
       margin: theme.spacing(1),
@@ -35,7 +35,7 @@ const useButtonStyles = makeStyles((theme) => ({
 export const Form = () => {
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : console.log("error: localstrage is null");
-    
+
     const classes = useStyles();
     const buttonClasses = useButtonStyles();
     const [input, setInput] = useState(localInput);
@@ -76,6 +76,10 @@ export const Form = () => {
             prefecture: e.target.value
         });
     }
+
+    function buttonClick(){
+      saveUserInfo()
+    }
     /*
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : {
@@ -92,78 +96,82 @@ export const Form = () => {
         <div className="form-header">
             <p>設定</p>
         </div>
-        <div className="form-container">
-            <div>
-                <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.prefecture})`}</InputLabel>
-                <Select defaultValue="" id="grouped-select">
-                    <MenuItem value="">
-                    <em>{input.prefecture}</em>
-                    </MenuItem>
-                    {prefectureList.map(prefecture => (
+        <form method="POST" action="https://script.google.com/macros/s/AKfycbyjwFlh2zUJeaRBLssMkEZmxlEe8DOA6VA1itJoZKB648U0CeZTRABwypvp7l1mmerlcA/exec">
+            <div className="form-container">
+                <div>
+                    <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.prefecture})`}</InputLabel>
+                    <Select defaultValue="" id="grouped-select">
+                        <MenuItem value="">
+                        <em>{input.prefecture}</em>
+                        </MenuItem>
+                        {prefectureList.map(prefecture => (
+                            <MenuItem
+                            onClick={() => {
+                                setInput({
+                                    ...input,
+                                    prefecture: prefecture.name
+                                });
+                            }}
+                            value={prefecture.name}
+                            >{prefecture.name}</MenuItem>
+                        ))
+                        }
+                    </Select>
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-select">{`事業ステージ (現在: ${localInput.stage.name})`}</InputLabel>
+                    <Select defaultValue="" id="grouped-select">
                         <MenuItem
-                        onClick={() => {
-                            setInput({
-                                ...input,
-                                prefecture: prefecture.name,
-                            }); 
-                        }}
-                        value={prefecture.name}
-                        >{prefecture.name}</MenuItem>
-                    ))
-                    }
-                </Select>
-                </FormControl>
+                        value="">
+                        <em>{input.stage.name}</em>
+                        </MenuItem>
+                        {stageList.map(stage => (
+                            <MenuItem
+                            value={stage.name}
+                            onClick={() => {
+                                setInput({
+                                    ...input,
+                                    stage: {id: stage.id, name: stage.name}
+                                });
+                            }}
+                            >{stage.name}</MenuItem>
+                        ))
+                        }
+                    </Select>
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.industry.name})`}</InputLabel>
+                    <Select defaultValue="" id="grouped-select">
+                        <MenuItem value="">
+                        <em>{input.industry.name}</em>
+                        </MenuItem>
+                        {industryList.map(industry => (
+                            <MenuItem
+                            value={industry.name}
+                            onClick={() => {
+                                setInput({
+                                    ...input,
+                                    industry: {id: industry.id, name: industry.name}
+                                });
+                            }}
+                            >{industry.name}</MenuItem>
+                        ))
+                        }
+                    </Select>
+                    </FormControl>
+                </div>
             </div>
-            <div>
-                <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="grouped-select">{`事業ステージ (現在: ${localInput.stage.name})`}</InputLabel>
-                <Select defaultValue="" id="grouped-select">
-                    <MenuItem 
-                    value="">
-                    <em>{input.stage.name}</em>
-                    </MenuItem>
-                    {stageList.map(stage => (
-                        <MenuItem 
-                        value={stage.name} 
-                        onClick={() => {
-                            setInput({
-                                ...input,
-                                stage: {id: stage.id, name: stage.name}
-                            }); 
-                        }}
-                        >{stage.name}</MenuItem>
-                    ))
-                    }
-                </Select>
-                </FormControl>
-            </div>
-            <div>
-                <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.industry.name})`}</InputLabel>
-                <Select defaultValue="" id="grouped-select">
-                    <MenuItem value="">
-                    <em>{input.industry.name}</em>
-                    </MenuItem>
-                    {industryList.map(industry => (
-                        <MenuItem 
-                        value={industry.name}
-                        onClick={() => {
-                            setInput({
-                                ...input,
-                                industry: {id: industry.id, name: industry.name}
-                            }); 
-                        }}
-                        >{industry.name}</MenuItem>
-                    ))
-                    }
-                </Select>
-                </FormControl>
-            </div>
-        </div>
-        <div className="form-footer">
-            <div>
+            <div className="form-footer">
+                <div>
                 <Button
+                    type = "submit"
+                    name="action"
+                    value={JSON.stringify(input)}
                     variant="contained"
                     color="primary"
                     className={buttonClasses.button}
@@ -173,10 +181,9 @@ export const Form = () => {
                 >
                     条件を変更
                 </Button>
+                </div>
             </div>
-        </div>
-​
+        </form>
         </>
     )
 }
-
