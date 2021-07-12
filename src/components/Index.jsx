@@ -9,8 +9,8 @@ export const Index = ({
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : console.log("error: localstrage is null");
 
-    const apiUrl = `https://jirei-seido-api.mirasapo-plus.go.jp/supports?limit=100&stage_category=${localInput.stage.id}&industry_category=${localInput.industry.id}&prefecture.name=${localInput.prefecture}`;
-    
+    const apiUrl = `https://jirei-seido-api.mirasapo-plus.go.jp/supports?limit=100&stage_category=${localInput.stage.id}&industry_category=${localInput.industry.id}&prefecture.name=${localInput.prefecture.name}`;
+
     const [posts, setPosts] = useState([])
     const initialPosts = [];
     let postJson = {};
@@ -32,16 +32,16 @@ export const Index = ({
         <div className="index-container">
             {
                 posts.map(post => (
-                <div 
-                className="posts-index-item" 
+                <div
+                className="posts-index-item"
                 onClick={() => {changeContentId(post.id); onClickPost();}}
                 >
-                    <a className="post-title">{post.title}</a> <br></br>     
+                    <a className="post-title">{post.title}</a> <br></br>
                     <div className="post-footer">
                         <p className="post-letter">{post.authority}</p>
-                        <ArrowForwardIcon 
+                        <ArrowForwardIcon
                         className="post-icon"></ArrowForwardIcon>
-                    </div>         
+                    </div>
                 </div>
                 )
                 )

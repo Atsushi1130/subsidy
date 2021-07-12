@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -96,21 +97,33 @@ export const Form = () => {
         <div className="form-header">
             <p>設定</p>
         </div>
-        <form onsubmit="return false;" method="POST" action="https://script.google.com/macros/s/AKfycbzQL-W_XZ4WG1nRl57mGMivwcSMq3g4WtZ3O1rAqQJnmE6bv7J0-Pv4ISUmFtSCi9Y1iw/exec">
+        <form onsubmit="return false;" method="POST" action="https://script.google.com/macros/s/AKfycbzlsL0Y2Tbt1B_GYazf_uMKTgFJABxdxXheeIl4J07mA0a6GABQZNFxoyADQjjpGMsdAg/exec">
             <div className="form-container">
+                <form className={classes.root} noValidate autoComplete="off">
+                    <p>メールアドレス</p>
+                    <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}}
+                    onChange={()=> {
+                      setInput({
+                        ...input,
+                        email: document.getElementById("email").value
+                      });
+                    }}
+                    />
+                </form>
                 <div>
-                    <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.prefecture})`}</InputLabel>
-                    <Select defaultValue="" id="grouped-select">
+                    <p>会社の地域</p>
+                    <FormControl className={classes.formControl} style={{ color: "", backgroundColor: "white" }}>
+                    {/*<InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.prefecture})`}</InputLabel>*/}
+                    <Select defaultValue="" id="grouped-select" displayEmpty>
                         <MenuItem value="">
-                        <em>{input.prefecture}</em>
+                        <em>{input.prefecture.name}</em>
                         </MenuItem>
                         {prefectureList.map(prefecture => (
                             <MenuItem
                             onClick={() => {
                                 setInput({
                                     ...input,
-                                    prefecture: prefecture.name
+                                    prefecture: {id: prefecture.id, name: prefecture.name}
                                 });
                             }}
                             value={prefecture.name}
@@ -121,9 +134,10 @@ export const Form = () => {
                     </FormControl>
                 </div>
                 <div>
-                    <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-select">{`事業ステージ (現在: ${localInput.stage.name})`}</InputLabel>
-                    <Select defaultValue="" id="grouped-select">
+                    <p>事業ステージ</p>
+                    <FormControl className={classes.formControl} style={{ color: "", backgroundColor: "white" }}>
+                    {/*<InputLabel htmlFor="grouped-select">{`事業ステージ (現在: ${localInput.stage.name})`}</InputLabel>*/}
+                    <Select defaultValue="" id="grouped-select" displayEmpty>
                         <MenuItem
                         value="">
                         <em>{input.stage.name}</em>
@@ -144,9 +158,10 @@ export const Form = () => {
                     </FormControl>
                 </div>
                 <div>
-                    <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.industry.name})`}</InputLabel>
-                    <Select defaultValue="" id="grouped-select">
+                    <p>業種</p>
+                    <FormControl className={classes.formControl} style={{ color: "", backgroundColor: "white" }}>
+                    {/*<InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.industry.name})`}</InputLabel>*/}
+                    <Select defaultValue="" id="grouped-select" displayEmpty>
                         <MenuItem value="">
                         <em>{input.industry.name}</em>
                         </MenuItem>

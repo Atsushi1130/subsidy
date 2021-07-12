@@ -9,6 +9,7 @@ export const Content = ({
 }) => {
     const [content, setContent] = useState({})
     const contentUrl = `https://jirei-seido-api.mirasapo-plus.go.jp/supports/${contentId}`;
+    const contentWebUrl = `https://seido-navi.mirasapo-plus.go.jp/supports/${contentId}`
 
     const initialContent = {
         "title": "",
@@ -37,7 +38,7 @@ export const Content = ({
 
       <div className="content">
           <div className="content-header">
-          <ArrowBackIcon 
+          <ArrowBackIcon
           className="post-icon-1"
           onClick = {() => onClickBackButton()}
           ></ArrowBackIcon>
@@ -56,7 +57,7 @@ export const Content = ({
                         <a>{content.summary}</a>
                     </div>
                     <div>
-                        <a>{content.body}</a>         
+                        <a>{content.body}</a>
                     </div>
                     <div>
                         <h4>連絡先</h4>
@@ -65,7 +66,7 @@ export const Content = ({
             </div>
           </div>
           <div className="content-footer">
-              <a href=""><PublicIcon className="post-icon-2"></PublicIcon><span>webpage</span></a>
+              <a href = {'https://seido-navi.mirasapo-plus.go.jp/supports/'+ contentId}><PublicIcon className="post-icon-2"></PublicIcon><span>webpage</span></a>
           </div>
       </div>
     );
