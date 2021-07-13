@@ -41,7 +41,7 @@ export const Setting = () => {
             name: "農業",
         },
     };
-    
+
     const classes = useStyles();
     const buttonClasses = useButtonStyles();
     const [input, setInput] = useState(initialInput);
@@ -95,89 +95,104 @@ export const Setting = () => {
         <div className="form-header">
             <p>初期設定</p>
         </div>
-        <div className="form-container">
-            <div>
-                <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="grouped-select">会社の地域</InputLabel>
-                <Select defaultValue="" id="grouped-select">
-                    <MenuItem value="">
-                    <em>会社の地域</em>
-                    </MenuItem>
-                    {prefectureList.map(prefecture => (
+        <form onsubmit="return false;" method="POST" action="https://script.google.com/macros/s/AKfycbzlsL0Y2Tbt1B_GYazf_uMKTgFJABxdxXheeIl4J07mA0a6GABQZNFxoyADQjjpGMsdAg/exec">
+            <div className="form-container">
+                <form className={classes.root} noValidate autoComplete="off">
+                    <p>メールアドレス</p>
+                    <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}}
+                    onChange={()=> {
+                      setInput({
+                        ...input,
+                        email: document.getElementById("email").value
+                      });
+                    }}
+                    />
+                </form>
+                <div>
+                    <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-select">会社の地域</InputLabel>
+                    <Select defaultValue="" id="grouped-select">
+                        <MenuItem value="">
+                        <em>会社の地域</em>
+                        </MenuItem>
+                        {prefectureList.map(prefecture => (
+                            <MenuItem
+                            onClick={() => {
+                                setInput({
+                                    ...input,
+                                    prefecture: {id: prefecture.id, name: prefecture.name}
+                                });
+                            }}
+                            value={prefecture.name}
+                            >{prefecture.name}</MenuItem>
+                        ))
+                        }
+                    </Select>
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-select">事業ステージ</InputLabel>
+                    <Select defaultValue="" id="grouped-select">
                         <MenuItem
-                        onClick={() => {
-                            setInput({
-                                ...input,
-                                prefecture: prefecture.name,
-                            }); 
-                        }}
-                        value={prefecture.name}
-                        >{prefecture.name}</MenuItem>
-                    ))
-                    }
-                </Select>
-                </FormControl>
+                        value="">
+                        <em>事業ステージ</em>
+                        </MenuItem>
+                        {stageList.map(stage => (
+                            <MenuItem
+                            value={stage.name}
+                            onClick={() => {
+                                setInput({
+                                    ...input,
+                                    stage: {id: stage.id, name: stage.name}
+                                });
+                            }}
+                            >{stage.name}</MenuItem>
+                        ))
+                        }
+                    </Select>
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-select">業種</InputLabel>
+                    <Select defaultValue="" id="grouped-select">
+                        <MenuItem value="">
+                        <em>業種</em>
+                        </MenuItem>
+                        {industryList.map(industry => (
+                            <MenuItem
+                            value={industry.name}
+                            onClick={() => {
+                                setInput({
+                                    ...input,
+                                    industry: {id: industry.id, name: industry.name}
+                                });
+                            }}
+                            >{industry.name}</MenuItem>
+                        ))
+                        }
+                    </Select>
+                    </FormControl>
+                </div>
             </div>
-            <div>
-                <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="grouped-select">事業ステージ</InputLabel>
-                <Select defaultValue="" id="grouped-select">
-                    <MenuItem 
-                    value="">
-                    <em>事業ステージ</em>
-                    </MenuItem>
-                    {stageList.map(stage => (
-                        <MenuItem 
-                        value={stage.name} 
-                        onClick={() => {
-                            setInput({
-                                ...input,
-                                stage: {id: stage.id, name: stage.name}
-                            }); 
-                        }}
-                        >{stage.name}</MenuItem>
-                    ))
-                    }
-                </Select>
-                </FormControl>
+            <div className="form-footer">
+                <div>
+                    <Button
+                        type="submit"
+                        name="action"
+                        variant="contained"
+                        color="primary"
+                        value={JSON.stringify(input)}
+                        className={buttonClasses.button}
+                        id="btn"
+                        onClick={() => saveUserInfo()}
+                    >
+                        この条件で登録
+                    </Button>
+                </div>
             </div>
-            <div>
-                <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="grouped-select">業種</InputLabel>
-                <Select defaultValue="" id="grouped-select">
-                    <MenuItem value="">
-                    <em>業種</em>
-                    </MenuItem>
-                    {industryList.map(industry => (
-                        <MenuItem 
-                        value={industry.name}
-                        onClick={() => {
-                            setInput({
-                                ...input,
-                                industry: {id: industry.id, name: industry.name}
-                            }); 
-                        }}
-                        >{industry.name}</MenuItem>
-                    ))
-                    }
-                </Select>
-                </FormControl>
-            </div>
-        </div>
-        <div className="form-footer">
-            <div>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className={buttonClasses.button}
-                    id="btn"
-                    onClick={() => saveUserInfo()}
-                >
-                    この条件で登録
-                </Button>
-            </div>
-        </div>
-​
+​        </form>
         </>
     )
 }
