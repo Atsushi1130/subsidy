@@ -55,7 +55,17 @@ export const Screen = () => {
         />
         }
         {switchScreen.isVisibleForm &&
-        <Form/>
+        <Form
+        contentId = {contentId}
+        onClickChangeButton={() => setScreen({
+          ...switchScreen,
+          isVisibleForm: false,
+          isVisibleIndex: true,
+          isVisibleContent: false,
+          isVisibleAbout: false,
+          isVisibleContent: false,
+        })
+        }/>
         }
         <Tab
           onClickFormTab={

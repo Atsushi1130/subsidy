@@ -19,6 +19,7 @@ import { Input } from "@material-ui/core";
 const stageUrl = `https://jirei-seido-api.mirasapo-plus.go.jp/categories/stages`;
 const prefectureUrl = "https://jirei-seido-api.mirasapo-plus.go.jp/prefectures";
 const industryUrl = "https://jirei-seido-api.mirasapo-plus.go.jp/categories/industries";
+const GASUrl = 'https://script.google.com/macros/s/AKfycbwfz8F-AiFO6mUhI_VpbM6LgxSh_jlBm_ELvDiBqaENpj2tRMER9zQtkPeY99X5uSXM6g/exec';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -33,7 +34,10 @@ const useButtonStyles = makeStyles((theme) => ({
     },
   }));
 // ------------------フォームコンポーネント----------------
-export const Form = () => {
+export const Form = ({
+    onClickChangeButton,
+    contentId,
+}) => {
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : console.log("error: localstrage is null");
 
@@ -81,6 +85,14 @@ export const Form = () => {
     function buttonClick(){
       saveUserInfo()
     }
+
+    function postData(){
+        axios.post(GASUrl, JSON.stringify(input))
+        .finally(() => {
+            onClickChangeButton();
+        });
+    }
+
     /*
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : {
@@ -97,11 +109,11 @@ export const Form = () => {
         <div className="form-header">
             <p>設定</p>
         </div>
-        <form onsubmit="return false;" method="POST" action="https://script.google.com/macros/s/AKfycbzlsL0Y2Tbt1B_GYazf_uMKTgFJABxdxXheeIl4J07mA0a6GABQZNFxoyADQjjpGMsdAg/exec">
+        {/* <form onsubmit="return false;" method="POST" action={GASUrl}> */}
             <div className="form-container">
                 <form className={classes.root} noValidate autoComplete="off">
                     <p>メールアドレス</p>
-                    <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}}
+                    <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}} value={input.email}
                     onChange={()=> {
                       setInput({
                         ...input,
@@ -191,14 +203,14 @@ export const Form = () => {
                     color="primary"
                     className={buttonClasses.button}
                     id="btn"
-                    onClick={() => saveUserInfo()}
+                    onClick={() => {saveUserInfo();postData()}}
                     endIcon={<CloudUploadIcon></CloudUploadIcon>}
                 >
                     条件を変更
                 </Button>
                 </div>
             </div>
-        </form>
+        {/* </form> */}
         </>
     )
 }
