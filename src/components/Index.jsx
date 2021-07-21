@@ -1,6 +1,8 @@
 import React from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 export const Index = ({
@@ -10,16 +12,23 @@ export const Index = ({
     const state = useSelector(state => state)
 
     return (
-        <div className="index-container">
-            {console.log(state)}
+        <>
             {state.loading ? (
                 <>
-                {[...Array(12).keys()].map(i =>
-                        <Skeleton 
-                        className="index-item-skeleton"
-                        key={i} animation="wave">
-                        </Skeleton>
-                )}
+                    {[...Array(10).keys()].map(i =>
+                        <div className="posts-index-skeleton-item">
+                            <Box pb={3}>
+                            <Typography key="skeleton-rows" variant="h5">
+                                <Skeleton animation="wave" width="70%"/>
+                                <Skeleton animation="wave" width="70%"/>
+                                <Skeleton animation="wave" width="70%"/>
+                            </Typography>
+                            </Box>
+                            <Typography key="skeleton-a" variant="a">
+                                <Skeleton animation="wave" width='30%'/>
+                            </Typography>
+                        </div>
+                    )}
                 </>
                 ) : (
                     state.post.map(post => (
@@ -30,14 +39,13 @@ export const Index = ({
                             <a className="post-title">{post.title}</a> <br></br>
                             <div className="post-footer">
                                 <p className="post-letter">{post.authority}</p>
-                                <ArrowForwardIcon
-                                className="post-icon"></ArrowForwardIcon>
+                                <ArrowForwardIcon className="post-icon"/>
                             </div>
                         </div>
                         )
                         )
                 )
             }
-        </div>
+        </>
     );
 }

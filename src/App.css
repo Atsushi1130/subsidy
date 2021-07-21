@@ -98,9 +98,13 @@ body {
   border-radius: 8px;
 }
 
-.index-item-skeleton {
-  margin: 0px 20px;
-  padding: 100px 120px;
+.posts-index-skeleton-item {
+  margin: 10px;
+  border-bottom: 1px;
+  background-color: #efefef;
+  margin: 25px 20px;
+  padding: 20px 20px 0px 20px;
+  border-radius: 8px;
 }
 
 .post-title {
