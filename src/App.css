@@ -79,12 +79,6 @@
 
 }
 
-
-.posts-index-item {
-  margin: 10px;
-  border-bottom: 1px;
-}
-
 /*　Main　*/
 body {
   background-color: #BFDEFC;
@@ -95,11 +89,18 @@ body {
 }
 
 .posts-index-item {
+  margin: 10px;
+  border-bottom: 1px;
   color:#2699FB;
   background-color: white;
   margin: 25px 20px;
   padding: 20px 20px 0px 20px;
   border-radius: 8px;
+}
+
+.index-item-skeleton {
+  margin: 0px 20px;
+  padding: 100px 120px;
 }
 
 .post-title {

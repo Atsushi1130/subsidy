@@ -1,6 +1,7 @@
 import React from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 export const Index = ({
     onClickPost,
@@ -12,7 +13,14 @@ export const Index = ({
         <div className="index-container">
             {console.log(state)}
             {state.loading ? (
-                    <a>loading... .... ..... ...</a>
+                <>
+                {[...Array(12).keys()].map(i =>
+                        <Skeleton 
+                        className="index-item-skeleton"
+                        key={i} animation="wave">
+                        </Skeleton>
+                )}
+                </>
                 ) : (
                     state.post.map(post => (
                         <div
