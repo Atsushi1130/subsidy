@@ -7,6 +7,9 @@ import { Content } from './Content.jsx';
 import { Index } from './Index.jsx';
 import { Tab } from './Tab.jsx';
 
+import {fetchIndexData} from '../modules/index';
+import { useDispatch } from "react-redux";
+
 const apiUrl = "https://jirei-seido-api.mirasapo-plus.go.jp/supports?limit=100&stage_category=1&industry_category=3&prefecture.name=北海道";
 
 const initialScreenState = {
@@ -20,6 +23,11 @@ const initialScreenState = {
 export const Screen = () => {
     const [switchScreen, setScreen] = useState(initialScreenState);
     const [contentId, setContentId] = useState("a")
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        fetchIndexData(dispatch)
+    }, []);
 
     return (
       <>

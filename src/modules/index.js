@@ -1,5 +1,4 @@
-import { useSelector } from 'react-redux'
-import { createStore } from "redux";
+import {initialState} from "./store"
 import axios from 'axios';
 
 // 諸便利関数
@@ -13,12 +12,6 @@ const getUserInfo = async () => {
         console.log('cannot get localstrage')
         return null
     }
-}
-
-// initial state
-const initialIndexState = {
-    post: [],
-    loading: false,
 }
 
 // action creator
@@ -41,7 +34,7 @@ export const fetchIndexData = async (dispatch) => {
 
 // reducer
 export const indexReducer = (
-    state = initialIndexState, // { post: null, loading: false }
+    state = initialState.indexState, // { post: null, loading: false }
     { type, payload }
   ) => {
     switch (type) {
@@ -53,7 +46,3 @@ export const indexReducer = (
         return state;
     }
   };
-
-const store = createStore(indexReducer, initialIndexState);
-
-export default store

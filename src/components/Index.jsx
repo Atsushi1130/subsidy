@@ -5,12 +5,14 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 
+import {fetchContentData} from "../modules/content"
+
 export const Index = ({
     onClickPost,
-    changeContentId,
 }) => {
     const state = useSelector(state => state)
-
+    const dispatch = useDispatch()
+    console.log(state)
     return (
         <>
             {state.loading ? (
@@ -18,7 +20,7 @@ export const Index = ({
                     {[...Array(10).keys()].map(i =>
                         <div className="posts-index-skeleton-item">
                             <Box pb={3}>
-                            <Typography key="skeleton-rows" variant="h5">
+                            <Typography key={i} variant="h5">
                                 <Skeleton animation="wave" width="70%"/>
                                 <Skeleton animation="wave" width="70%"/>
                                 <Skeleton animation="wave" width="70%"/>
@@ -34,7 +36,7 @@ export const Index = ({
                     state.post.map(post => (
                         <div
                         className="posts-index-item"
-                        onClick={() => {changeContentId(post.id); onClickPost();}}
+                        onClick={() => {fetchContentData(dispatch, post.id); onClickPost();}}
                         >
                             <a className="post-title">{post.title}</a> <br></br>
                             <div className="post-footer">
