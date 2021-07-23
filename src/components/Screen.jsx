@@ -7,7 +7,7 @@ import { Content } from './Content.jsx';
 import { Index } from './Index.jsx';
 import { Tab } from './Tab.jsx';
 
-import {fetchIndexData} from '../modules/index';
+import { fetchIndexData } from '../modules/actions';
 import { useDispatch } from "react-redux";
 
 const apiUrl = "https://jirei-seido-api.mirasapo-plus.go.jp/supports?limit=100&stage_category=1&industry_category=3&prefecture.name=北海道";
@@ -44,7 +44,7 @@ export const Screen = () => {
             })
           }
         changeContentId = {
-          (id) => {setContentId(id); console.log(contentId);}
+          (id) => {setContentId(id)}
         }
         />
         }

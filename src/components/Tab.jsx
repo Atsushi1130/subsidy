@@ -6,8 +6,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
 
-import {fetchIndexData} from '../modules/index'
-
 const FooterWrapper = styled.div`
   display: flex;
   justify-content: flex-start;

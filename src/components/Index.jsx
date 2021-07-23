@@ -5,14 +5,13 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import {fetchContentData} from "../modules/content"
+import {fetchContentData} from "../modules/actions"
 
 export const Index = ({
     onClickPost,
 }) => {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
-    console.log(state)
     return (
         <>
             {state.loading ? (
