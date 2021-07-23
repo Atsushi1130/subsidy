@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { createMuiTheme } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
-
-import {fetchIndexData} from '../modules/index'
 
 const FooterWrapper = styled.div`
   display: flex;
@@ -55,7 +52,6 @@ export const Tab = ({
     const handleChange = () => {
         setValue( {value} );
       }
-    const dispatch = useDispatch()
     
     return (
     <>
@@ -70,7 +66,7 @@ export const Tab = ({
         >    
             {/*MEMO: BottomNavigationActionは, BottomNavigation直下じゃないと動作しないので注意*/}
             <BottomNavigationAction label="制度一覧" icon={<AssignmentRoundedIcon />} style={{ color: "#2699FB", backgroundColor: "" }}
-            onClick={() => {onClickIndexTab(); fetchIndexData(dispatch);}}
+            onClick={() => {onClickIndexTab()}}
             />
             <BottomNavigationAction label="設定" icon={<SettingsRoundedIcon />} style={{ color: "#2699FB", backgroundColor: "" }}
             onClick={() => onClickFormTab()}
