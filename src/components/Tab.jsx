@@ -4,8 +4,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
+
 const FooterWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -63,10 +63,10 @@ export const Tab = ({
         }}
         showLabels
         className="tab-icon"
-        >
+        >    
             {/*MEMO: BottomNavigationActionは, BottomNavigation直下じゃないと動作しないので注意*/}
             <BottomNavigationAction label="制度一覧" icon={<AssignmentRoundedIcon />} style={{ color: "#2699FB", backgroundColor: "" }}
-            onClick={() => onClickIndexTab()}
+            onClick={() => {onClickIndexTab()}}
             />
             <BottomNavigationAction label="設定" icon={<SettingsRoundedIcon />} style={{ color: "#2699FB", backgroundColor: "" }}
             onClick={() => onClickFormTab()}
