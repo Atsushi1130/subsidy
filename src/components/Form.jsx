@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { GAS_URL } from "../credentials.js";
+import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
+import Icon from '@material-ui/core/Icon';
+import SaveIcon from '@material-ui/icons/Save';
+import { Input } from "@material-ui/core";
 
 const stageUrl = `https://jirei-seido-api.mirasapo-plus.go.jp/categories/stages`;
 const prefectureUrl = "https://jirei-seido-api.mirasapo-plus.go.jp/prefectures";
 const industryUrl = "https://jirei-seido-api.mirasapo-plus.go.jp/categories/industries";
+
+const GASUrl = 'https://script.google.com/macros/s/AKfycbyOPLJJH0SDJabJ8ABUCeYFgVWRT5126k1MN0JSOdroHI-zh5dsGUQB8lsE7rI48RCHlQ/exec';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -24,7 +35,10 @@ const useButtonStyles = makeStyles((theme) => ({
     },
   }));
 // ------------------フォームコンポーネント----------------
-export const Form = () => {
+export const Form = ({
+    onClickChangeButton,
+    contentId,
+}) => {
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : console.log("error: localstrage is null");
 
@@ -72,6 +86,17 @@ export const Form = () => {
     function buttonClick(){
       saveUserInfo()
     }
+
+    function postData(){
+        axios.post(GASUrl, JSON.stringify(input))
+        .then(response => {
+          console.log("送信結果:",response.data)
+        })
+        .finally(() => {
+            onClickChangeButton();
+        });
+    }
+
     /*
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : {
@@ -88,11 +113,10 @@ export const Form = () => {
         <div className="form-header">
             <p>設定</p>
         </div>
-        <form onsubmit="return false;" method="POST" action="https://script.google.com/macros/s/AKfycbzlsL0Y2Tbt1B_GYazf_uMKTgFJABxdxXheeIl4J07mA0a6GABQZNFxoyADQjjpGMsdAg/exec">
             <div className="form-container">
                 <form className={classes.root} noValidate autoComplete="off">
                     <p>メールアドレス</p>
-                    <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}}
+                    <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}} value={input.email}
                     onChange={()=> {
                       setInput({
                         ...input,
@@ -182,14 +206,13 @@ export const Form = () => {
                     color="primary"
                     className={buttonClasses.button}
                     id="btn"
-                    onClick={() => saveUserInfo()}
+                    onClick={() => {saveUserInfo();postData()}}
                     endIcon={<CloudUploadIcon></CloudUploadIcon>}
                 >
                     条件を変更
                 </Button>
                 </div>
             </div>
-        </form>
         </>
     )
 }

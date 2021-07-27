@@ -6,6 +6,7 @@ import { Form } from './Form.jsx';
 import { Content } from './Content.jsx';
 import { Index } from './Index.jsx';
 import { Tab } from './Tab.jsx';
+import { Setting } from './Setting.jsx';
 
 import { fetchIndexData } from '../modules/actions';
 import { useDispatch } from "react-redux";
@@ -63,7 +64,17 @@ export const Screen = () => {
         />
         }
         {switchScreen.isVisibleForm &&
-        <Form/>
+          <Form
+          contentId = {contentId}
+          onClickChangeButton={() => setScreen({
+            ...switchScreen,
+            isVisibleForm: false,
+            isVisibleIndex: true,
+            isVisibleContent: false,
+            isVisibleAbout: false,
+            isVisibleContent: false,
+          })
+          }/>
         }
         <Tab
           onClickFormTab={
