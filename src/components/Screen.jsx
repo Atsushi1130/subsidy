@@ -6,7 +6,6 @@ import { Form } from './Form.jsx';
 import { Content } from './Content.jsx';
 import { Index } from './Index.jsx';
 import { Tab } from './Tab.jsx';
-import { Setting } from './Setting.jsx';
 
 import { fetchIndexData } from '../modules/actions';
 import { useDispatch } from "react-redux";

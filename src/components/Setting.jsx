@@ -9,6 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const stageUrl = `https://jirei-seido-api.mirasapo-plus.go.jp/categories/stages`;
 const prefectureUrl = "https://jirei-seido-api.mirasapo-plus.go.jp/prefectures";
 const industryUrl = "https://jirei-seido-api.mirasapo-plus.go.jp/categories/industries";
+
+const GASUrl = 'https://script.google.com/macros/s/AKfycbyOPLJJH0SDJabJ8ABUCeYFgVWRT5126k1MN0JSOdroHI-zh5dsGUQB8lsE7rI48RCHlQ/exec';
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -21,7 +23,9 @@ const useButtonStyles = makeStyles((theme) => ({
     },
   }));
 // ------------------初期設定コンポーネント----------------
-export const Setting = () => {
+export const Setting = ({
+    onClickInitButton,
+}) => {
     const initialInput = {
         prefecture: "新潟県",
         stage: {
@@ -74,6 +78,16 @@ export const Setting = () => {
             prefecture: e.target.value
         });
     }
+
+    function postData(){
+        axios.post(GASUrl, JSON.stringify(input))
+        .then(response => {
+          console.log("送信結果:",response.data)
+        })
+        .finally(() => {
+            onClickInitButton();
+        });
+    }
     /*
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : {
@@ -87,7 +101,6 @@ export const Setting = () => {
         <div className="form-header">
             <p>初期設定</p>
         </div>
-        <form onsubmit="return false;" method="POST" action="https://script.google.com/macros/s/AKfycbzlsL0Y2Tbt1B_GYazf_uMKTgFJABxdxXheeIl4J07mA0a6GABQZNFxoyADQjjpGMsdAg/exec">
             <div className="form-container">
                 <form className={classes.root} noValidate autoComplete="off">
                     <p>メールアドレス</p>
@@ -178,13 +191,12 @@ export const Setting = () => {
                         value={JSON.stringify(input)}
                         className={buttonClasses.button}
                         id="btn"
-                        onClick={() => saveUserInfo()}
+                        onClick={() => {saveUserInfo();postData()}}
                     >
                         この条件で登録
                     </Button>
                 </div>
             </div>
-​        </form>
         </>
     )
 }

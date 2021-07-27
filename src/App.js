@@ -30,7 +30,10 @@ function App() {
                 className="responsive"
                 />
               ) : (
-                  <Setting to="/setting"/>
+                  <Setting
+                  to="/setting"
+                  onClickInitButton = {() => window.location.reload()}
+                  />
               )
           )}
         />
