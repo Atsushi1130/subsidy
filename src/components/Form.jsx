@@ -97,6 +97,7 @@ export const Form = ({
         });
     }
 
+
     /*
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : {
@@ -115,8 +116,8 @@ export const Form = ({
         </div>
             <div className="form-container">
                 <form className={classes.root} noValidate autoComplete="off">
-                    <p>メールアドレス</p>
-                    <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}} value={input.email}
+                    <p>メールアドレス<span className="required">必須</span></p>
+                    <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}} value={input.email} 
                     onChange={()=> {
                       setInput({
                         ...input,
@@ -124,9 +125,10 @@ export const Form = ({
                       });
                     }}
                     />
+                  
                 </form>
                 <div>
-                    <p>会社の地域</p>
+                    <p>会社の地域<span className="required">必須</span></p>
                     <FormControl className={classes.formControl} style={{ color: "", backgroundColor: "white" }}>
                     {/*<InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.prefecture})`}</InputLabel>*/}
                     <Select defaultValue="" id="grouped-select" displayEmpty>
@@ -149,7 +151,7 @@ export const Form = ({
                     </FormControl>
                 </div>
                 <div>
-                    <p>事業ステージ</p>
+                    <p>事業ステージ<span className="required">必須</span></p>
                     <FormControl className={classes.formControl} style={{ color: "", backgroundColor: "white" }}>
                     {/*<InputLabel htmlFor="grouped-select">{`事業ステージ (現在: ${localInput.stage.name})`}</InputLabel>*/}
                     <Select defaultValue="" id="grouped-select" displayEmpty>
@@ -173,7 +175,7 @@ export const Form = ({
                     </FormControl>
                 </div>
                 <div>
-                    <p>業種</p>
+                    <p>業種<span className="required">必須</span></p>
                     <FormControl className={classes.formControl} style={{ color: "", backgroundColor: "white" }}>
                     {/*<InputLabel htmlFor="grouped-select">{`会社の地域 (現在: ${localInput.industry.name})`}</InputLabel>*/}
                     <Select defaultValue="" id="grouped-select" displayEmpty>
@@ -208,6 +210,7 @@ export const Form = ({
                     id="btn"
                     onClick={() => {saveUserInfo();postData()}}
                     endIcon={<CloudUploadIcon></CloudUploadIcon>}
+                    disabled={!input.email}
                 >
                     条件を変更
                 </Button>

@@ -13,7 +13,7 @@ export const Index = ({
     const state = useSelector(state => state)
     const dispatch = useDispatch()
     return (
-        <>
+        <div className="index-container">
             {state.loading ? (
                 <>
                     {[...Array(10).keys()].map(i =>
@@ -47,6 +47,6 @@ export const Index = ({
                         )
                 )
             }
-        </>
+        </div>
     );
 }

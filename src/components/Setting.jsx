@@ -27,14 +27,14 @@ export const Setting = ({
     onClickInitButton,
 }) => {
     const initialInput = {
-        prefecture: "新潟県",
+        prefecture: "",
         stage: {
-            id: "1",
-            name: "事業計画",
+            id: "",
+            name: "",
         },
         industry: {
-            id: "1",
-            name: "農業",
+            id: "",
+            name: "",
         },
     };
 
@@ -88,6 +88,7 @@ export const Setting = ({
             onClickInitButton();
         });
     }
+
     /*
     const info = localStorage.getItem("info");
     const localInput = info ? JSON.parse(info) : {
@@ -103,7 +104,7 @@ export const Setting = ({
         </div>
             <div className="form-container">
                 <form className={classes.root} noValidate autoComplete="off">
-                    <p>メールアドレス</p>
+                    <p>メールアドレス<span className="required">必須</span></p>
                     <input type="email" id="email" style={{color: "", backgroundColor: "white" , margin: 7}}
                     onChange={()=> {
                       setInput({
@@ -115,7 +116,7 @@ export const Setting = ({
                 </form>
                 <div>
                     <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-select">会社の地域</InputLabel>
+                    <InputLabel htmlFor="grouped-select">会社の地域<span className="required">必須</span></InputLabel>
                     <Select defaultValue="" id="grouped-select">
                         <MenuItem value="">
                         <em>会社の地域</em>
@@ -137,7 +138,7 @@ export const Setting = ({
                 </div>
                 <div>
                     <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-select">事業ステージ</InputLabel>
+                    <InputLabel htmlFor="grouped-select">事業ステージ<span className="required">必須</span></InputLabel>
                     <Select defaultValue="" id="grouped-select">
                         <MenuItem
                         value="">
@@ -160,7 +161,7 @@ export const Setting = ({
                 </div>
                 <div>
                     <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-select">業種</InputLabel>
+                    <InputLabel htmlFor="grouped-select">業種<span className="required">必須</span></InputLabel>
                     <Select defaultValue="" id="grouped-select">
                         <MenuItem value="">
                         <em>業種</em>
@@ -191,6 +192,7 @@ export const Setting = ({
                         value={JSON.stringify(input)}
                         className={buttonClasses.button}
                         id="btn"
+                        disabled={!input.email || !input.prefecture.id || !input.stage.id || !input.industry.id} 
                         onClick={() => {saveUserInfo();postData()}}
                     >
                         この条件で登録

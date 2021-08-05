@@ -10,6 +10,15 @@ export const Content = ({
 }) => {
     const state = useSelector(state => state)
     console.log(state)
+
+    function DeleteBr(){
+        try {
+            return state.content.inquiry.replace(/<br>/g, '')
+          } catch (TypeError) {
+            return state.content.inquiry
+          }
+    }
+
     return (
         <>
         {state.loading ? (
@@ -97,12 +106,12 @@ export const Content = ({
                           </div>
                           <div>
                               <h4>連絡先</h4>
-                              <a>{state.content.inquiry}</a>
-                          </div>
-                          <div className="content-footer">
-                            <a href = {'https://seido-navi.mirasapo-plus.go.jp/supports/'+state.content.id}><PublicIcon className="post-icon-2"></PublicIcon><span>webpage</span></a>
+                              <a>{DeleteBr()}</a>
                           </div>
                   </div>
+                </div>
+                <div className="content-footer">
+                    <a href = {'https://seido-navi.mirasapo-plus.go.jp/supports/'+state.content.id}><PublicIcon className="post-icon-2"></PublicIcon><span>webpage</span></a>
                 </div>
             </div>
             )
